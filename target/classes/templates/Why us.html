@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Document</title>
+    
+</head>
+<style>
+.mySlides {display:none;}
+</style>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+
+.transition,
+p,
+ul li i:before,
+ul li i:after {
+  transition: all 0.25s ease-in-out;
+}
+
+.flipIn,
+h1,
+ul li {
+  animation: flipdown 0.5s ease both;
+}
+
+.no-select,
+h2 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  perspective: 900;
+  overflow-y: scroll;
+  background-image: url("http://sebsauvage.net/galerie/photos/Wallpapers/vladstudio.com/vladstudio_where_tahrs_live_2880x1800_signed.jpg");
+  font-family: "Titillium Web", sans-serif;
+  color: #cf4f4f;
+}
+
+body {
+  min-height: 0;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  margin: 90px 0;
+  transform: translate(-50%, 0);
+  box-shadow: 0 10px 0 0 #ff6873 inset;
+  background-color: #1a191a;
+  max-width: 60%;
+  padding: 30px;
+}
+@media (max-width: 550px) {
+  body {
+    box-sizing: border-box;
+    transform: translate(0, 0);
+    max-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    left: 0;
+  }
+}
+
+.rules h1,
+h2 {
+  color: #cf4f4f;
+}
+
+.rules h1 {
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  font-size: 36px;
+  line-height: 42px;
+  letter-spacing: 3px;
+  font-weight: 100;
+}
+
+.rules h2 {
+  font-size: 26px;
+  line-height: 34px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  display: block;
+  background-color: #1a191a;
+  margin: 0;
+  cursor: pointer;
+}
+.rules p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 17px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  max-height: 1200px;
+  opacity: 1;
+  transform: translate(0, 0);
+  margin-top: 14px;
+  z-index: 2;
+}
+
+.rules ul {
+  list-style: none;
+  perspective: 900;
+  padding: 0;
+  margin: 0;
+}
+.rules ul li {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  padding-bottom: 4px;
+  padding-top: 18px;
+  border-top: 1px solid #cf4f4f;
+}
+.rules ul li:nth-of-type(1) {
+  animation-delay: 0.5s;
+}
+.rules ul li:nth-of-type(2) {
+  animation-delay: 0.75s;
+}
+.rules ul li:nth-of-type(3) {
+  animation-delay: 1s;
+}
+.rules ul li:last-of-type {
+  padding-bottom: 0;
+}
+.rules ul li i {
+  position: absolute;
+  transform: translate(-6px, 0);
+  margin-top: 16px;
+  right: 0;
+}
+.rules ul li i:before,
+ul li i:after {
+  content: "";
+  position: absolute;
+  background-color: #cf4f4f;
+  width: 3px;
+  height: 9px;
+}
+.rules ul li i:before {
+  transform: translate(-2px, 0) rotate(45deg);
+}
+.rules ul li i:after {
+  transform: translate(2px, 0) rotate(-45deg);
+}
+.rules ul li input[type="checkbox"] {
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  opacity: 0;
+}
+.rules ul li input[type="checkbox"]:checked ~ p {
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
+  transform: translate(0, 50%);
+}
+.rules ul li input[type="checkbox"]:checked ~ i:before {
+  transform: translate(2px, 0) rotate(45deg);
+}
+.rules ul li input[type="checkbox"]:checked ~ i:after {
+  transform: translate(-2px, 0) rotate(-45deg);
+}
+
+@keyframes flipdown {
+  0% {
+    opacity: 0;
+    transform-origin: top center;
+    transform: rotateX(-90deg);
+  }
+  5% {
+    opacity: 1;
+  }
+  80% {
+    transform: rotateX(8deg);
+  }
+  83% {
+    transform: rotateX(6deg);
+  }
+  92% {
+    transform: rotateX(-3deg);
+  }
+  100% {
+    transform-origin: top center;
+    transform: rotateX(0deg);
+  }
+}
+
+.ewlink {
+  text-decoration: none;
+  color: #ff6873;
+}
+
+
+</style>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/logo.jpg}"  src="../static/images/logo.png" width="auto" height="40" class="d-inline-block align-top" alt=""/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"></ul>
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}" href="#">home</a>
+                </li>
+                
+              
+                
+                
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/shop}" href="#">shop</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">logout</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/cart}" href="#">cart</a>
+                </li>
+                <li class="nav-item active">
+                    <span class="nav-link" th:text="${cartCount}">0</span>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="rules">
+
+  <!--****************
+Centered Title
+Tags used:
+      <center>
+      <h1>
+*****************-->
+  <center>
+    <h1>
+      <b>
+        Rulebooks and Guidelines
+      </b>
+    </h1>
+  </center>
+
+  <!--****************
+Welcome Text
+Tags used:
+      <p>    | Paragraph Tag.
+      <a>    | Link Tag. 
+      <i>    | Italics.
+      <br>   | Breaks up text.
+*****************-->
+  <p>
+    We believe everyone should be welcomed, every point of view should be given a chance. We welcome debate, as long as it is done peacefully and respectfully; any point of view is welcomed. Respect is imperative, everyone is equal here. Discussion must be kept civil, feel free to express yourself as long as you do it calmly.
+
+    <br>
+    <!--BREAK-->
+    <br>
+
+    Upon registration to
+
+    “<a href="www.nasclub.co" class="ewlink"><i>www.nasclub.co</i></a>”
+
+    you agree to following these rules/guidelines. Staff can and will use their own judgement when deciding on which warning/punishment is best suited to any given user.
+
+    <br>
+    <!--BREAK-->
+    <br>
+
+    We reserve the right to change or modify these rules at any given time with or without reason. We also reserve the right to remove you from our website without warning and/or reason, however, a reason will generally be provided and you may ask for one if you are concerned.
+  </p>
+
+  <!--****************
+Sectional Paragraphs
+Tags used:
+      <ul>    | Unordered List.
+      <li>    | List Item. 
+      <input> | Input box.
+      <h2>    | Heading size 2.
+      <p>     | Paragraph Tag.
+      <br>    | Break.
+*****************-->
+  <ul>
+    <li>
+      <input type="checkbox" checked>
+
+      <i></i>
+      <h2>General Rulebooks</h2>
+      <p>
+        You are not allowed to;<br> • Continually and aggressively insult or stalk other users.
+        <br> • Post personally identifiable information (i.e. name, address, email, phone number, etc.), without prior consent.
+        <br> • Like or post boost.
+        <br> • Derail a thread's topic.
+        <br> • Post links to inappropriate sites.
+        <br> • Post spam (i.e. +1, rickrolls, repeated content) or Re-post Closed, Modified, Deleted Content.
+        <br> • Triple post.
+        <br> • Abuse glitches
+      </p>
+    </li>
+    <li>
+      <input type="checkbox" checked>
+      <i></i>
+      <h2>Forum Guidelines</h2>
+      <p><b>I. Arguments with Moderators<br></b>
+        You are not allowed to openly argue with a moderator about punishments. Contact the Moderator via a private message. These situations should be dealt with privately.
+        <br>
+
+        <br>
+        <b>II. Forum Accounts<br></b>
+        You are not allowed to share your account. Forum accounts are intended for the use by one person. You are not allowed to create backup accounts for the purpose of posting in our debate forums, in the event of your main being banned.
+        <br>
+
+        <br>
+        <b>III. Remain on Topic<br></b>
+        Threads should remain on the topic that they are discussing, they should not be discussing other topics. A new thread should be made for a new discussion. Please do understand we are lenient upon this rule however if the topics gets majorly derailed we will take action.
+        <br>
+
+        <br>
+        <b>IV. Inappropriate content<br></b>
+        Threads containing pornography, illegal content will be removed and the user banned. Racial, sexual, or any other form of discrimination is currently not tolerated. We are lenient depending upon the mannerism of discussion.
+        <br>
+
+        <br>
+        <b>V. Flame or Provoke<br></b>
+        Do not continually and aggressively insult or flame other members of the forum. Similarly, do not post with the intention of provoking a reaction from fellow members. This includes encouraging flame wars.
+        <br>
+
+        <br>
+        <b>V. Topic Setting<br></b>
+        The opening post of a thread sets the topic and the tone of the discussion. It should contain a member's opinions or questions with sufficient elaboration to establish a foundation for respectful discussion and debate. Images, links, quotations, etc., should be used to support a member's opinion, not to replace it.
+        <br>
+
+        <br>
+        <b>VI. Topic Duplication<br></b>
+        Threads should not be posted in the wrong forum, or be duplicates of other threads and/or topics (creating multiple threads with fundamentally the same topic is not allowed, unless otherwise stated by a staff member).
+        <br>
+
+        <br>
+        <b>VII. Private Messaging<br></b>
+        Publicly post or otherwise share PMs with other users unless you have the expressed permission of the sender to do so. Private Messages are intended to be just that - private.
+      </p>
+    </li>
+    <li>
+      <input type="checkbox" checked>
+      <i></i>
+      <h2>Chat Guidelines</h2>
+      <p><b>I. Arguments with Moderators<br></b>
+        You are not allowed to openly argue with a moderator about punishments. Contact the Moderator via a private message. These situations should be dealt with privately.
+        <br>
+
+        <br>
+        <b>II. Doxing<br></b>
+        You are not allowed to post personally identifiable information (i.e. name, address, email, phone number, etc.), without prior consent.
+        <br>
+
+        <br>
+        <b>III. Spamming<br></b>
+        You are not allowed to post similar or the same messages repeatidly in Nasclub Chat. We're currently cracking down on spamming, doing so will result in a one month ban.
+        <br>
+
+        <br>
+        <b>IV. Inappropriate content<br></b>
+        You are not allowed to post links containing pornography, illegal content. Racial, sexual, or any other form of discrimination is currently not tolerated.
+        <br>
+    </li>
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

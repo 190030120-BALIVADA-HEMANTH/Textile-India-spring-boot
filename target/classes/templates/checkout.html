@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+    <title>Document</title>
+</head>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif
+}
+
+.container {
+    margin: 30px auto
+}
+
+.container .card {
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background: #fff;
+    border-radius: 0px
+}
+
+body {
+    background: #eee
+}
+
+.btn.btn-primary {
+    background-color: #ddd;
+    color: black;
+    box-shadow: none;
+    border: none;
+    font-size: 20px;
+    width: 100%;
+    height: 100%
+}
+
+.btn.btn-primary:focus {
+    box-shadow: none
+}
+
+.container .card .img-box {
+    width: 80px;
+    height: 50px
+}
+
+.container .card img {
+    width: 100%;
+    object-fit: fill
+}
+
+.container .card .number {
+    font-size: 24px
+}
+
+.container .card-body .btn.btn-primary .fab.fa-cc-paypal {
+    font-size: 32px;
+    color: #3333f7
+}
+
+.fab.fa-cc-amex {
+    color: #1c6acf;
+    font-size: 32px
+}
+
+.fab.fa-cc-mastercard {
+    font-size: 32px;
+    color: red
+}
+
+.fab.fa-cc-discover {
+    font-size: 32px;
+    color: orange
+}
+
+.c-green {
+    color: green
+}
+
+.box {
+    height: 40px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ddd
+}
+
+.btn.btn-primary.payment {
+    background-color: #1c6acf;
+    color: white;
+    border-radius: 0px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px
+}
+
+.form__div {
+    height: 50px;
+    position: relative;
+    margin-bottom: 24px
+}
+
+.form-control {
+    width: 100%;
+    height: 45px;
+    font-size: 14px;
+    border: 1px solid #DADCE0;
+    border-radius: 0;
+    outline: none;
+    padding: 2px;
+    background: none;
+    z-index: 1;
+    box-shadow: none
+}
+
+.form__label {
+    position: absolute;
+    left: 16px;
+    top: 10px;
+    background-color: #fff;
+    color: #80868B;
+    font-size: 16px;
+    transition: .3s;
+    text-transform: uppercase
+}
+
+.form-control:focus+.form__label {
+    top: -8px;
+    left: 12px;
+    color: #1A73E8;
+    font-size: 12px;
+    font-weight: 500;
+    z-index: 10
+}
+
+.form-control:not(:placeholder-shown).form-control:not(:focus)+.form__label {
+    top: -8px;
+    left: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    z-index: 10
+}
+
+.form-control:focus {
+    border: 1.5px solid #1A73E8;
+    box-shadow: none
+}
+
+
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/lm.png}"  src="../static/images/lm.png" width="auto" height="40" class="d-inline-block align-top" alt=""/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"></ul>
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}" href="#">home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/shop}" href="#">shop</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">logout</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/cart}" href="#">cart</a>
+                </li>
+                <li class="nav-item active">
+                    <span class="nav-link" th:text="${cartCount}">0</span>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<div class="container">
+
+    <!--Section: Block Content-->
+    <section class="mt-5 mb-4">
+
+        <!--Grid row-->
+        <div class="row">
+
+            <!--Grid column-->
+            <div class="col-lg-8 mb-4">
+
+                <!-- Card -->
+                <div class="card wish-list pb-1">
+                    <div class="card-body">
+
+                        <h5 class="mb-2">Billing details</h5>
+
+                        <!-- Grid row -->
+                        <div class="row">
+
+                            <!-- Grid column -->
+                            <div class="col-lg-6">
+
+                                <!-- First name -->
+                                <div class="md-form md-outline mb-0 mb-lg-4">
+                                    <label for="firstName">First name</label>
+                                    <input type="text" id="firstName" required class="form-control mb-0 mb-lg-2">
+                                </div>
+
+                            </div>
+                            <!-- Grid column -->
+
+                            <!-- Grid column -->
+                            <div class="col-lg-6">
+
+                                <!-- Last name -->
+                                <div class="md-form md-outline">
+                                    <label for="lastName">Last name</label>
+                                    <input type="text" id="lastName" required class="form-control">
+                                </div>
+
+                            </div>
+                            <!-- Grid column -->
+
+                        </div>
+                        <!-- Grid row -->
+
+
+
+                        <!-- Country -->
+                        <div class="d-flex flex-wrap">
+                            <div class="select-outline position-relative w-100">
+                                <label>Country - <strong>INDIA</strong></label>
+
+
+                            </div>
+                        </div>
+
+                        <!-- Address Part 1 -->
+                        <div class="md-form md-outline mt-2">
+                            <label for="form14">Address (Line 1)</label>
+                            <input type="text" required id="form14" placeholder="House number and street name" class="form-control">
+                        </div>
+
+                        <!-- Address Part 2 -->
+                        <div class="md-form md-outline mt-2">
+                            <label for="form15">Address (Line 2)</label>
+                            <input type="text" id="form15" placeholder="Apartment, suite, unit etc. (optional)"
+                                   class="form-control">
+                        </div>
+
+                        <!-- Postcode / ZIP -->
+                        <div class="md-form md-outline mt-3">
+                            <label for="form16">Postcode / ZIP</label>
+                            <input type="text" maxlength="6" minlength="6" required id="form16" class="form-control">
+                        </div>
+
+                        <!-- Town / City -->
+                        <div class="md-form md-outline mt-2">
+                            <label for="form17">Town / City</label>
+                            <input type="text" required id="form17" class="form-control">
+
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="md-form md-outline mt-2">
+                            <label for="form18">Phone</label>
+                            <input type="number" minlength="10" maxlength="10" required id="form18" class="form-control">
+                        </div>
+
+                        <!-- Email address -->
+                        <div class="md-form md-outline mt-2">
+                            <label for="form19">Email address</label>
+                            <input type="email" required id="form19" class="form-control">
+                        </div>
+
+                        <!-- Additional information -->
+                        <div class="md-form md-outline mt-2">
+                            <label for="form76">Additional information</label>
+                            <textarea id="form76" class="md-textarea form-control" rows="4"></textarea>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+                <div class="container">
+    <div class="row">
+        <div class="col-lg-4 mb-lg-0 mb-3">
+            <div class="card p-3">
+                <div class="img-box"> <img src="https://www.freepnglogos.com/uploads/visa-logo-download-png-21.png" alt=""> </div>
+                <div class="number"> <label class="fw-bold" for="">**** **** **** 1060</label> </div>
+                <div class="d-flex align-items-center justify-content-between"> <small><span class="fw-bold">Expiry date:</span><span>10/16</span></small> <small><span class="fw-bold">Name:</span><span>Kumar</span></small> </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-lg-0 mb-3">
+            <div class="card p-3">
+                <div class="img-box"> <img src="https://www.freepnglogos.com/uploads/mastercard-png/file-mastercard-logo-svg-wikimedia-commons-4.png" alt=""> </div>
+                <div class="number"> <label class="fw-bold">**** **** **** 1060</label> </div>
+                <div class="d-flex align-items-center justify-content-between"> <small><span class="fw-bold">Expiry date:</span><span>10/16</span></small> <small><span class="fw-bold">Name:</span><span>Kumar</span></small> </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-lg-0 mb-3">
+            <div class="card p-3">
+                <div class="img-box"> <img src="https://www.freepnglogos.com/uploads/discover-png-logo/credit-cards-discover-png-logo-4.png" alt=""> </div>
+                <div class="number"> <label class="fw-bold">**** **** **** 1060</label> </div>
+                <div class="d-flex align-items-center justify-content-between"> <small><span class="fw-bold">Expiry date:</span><span>10/16</span></small> <small><span class="fw-bold">Name:</span><span>Kumar</span></small> </div>
+            </div>
+        </div>
+        <div class="col-12 mt-4">
+            <div class="card p-3">
+                <p class="mb-0 fw-bold h4">Payment Methods</p>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card p-3">
+                <div class="card-body border p-0">
+                    <p> <a class="btn btn-primary w-100 h-100 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample"> <span class="fw-bold">PayPal</span> <span class="fab fa-cc-paypal"> </span> </a> </p>
+                    <div class="collapse p-3 pt-0" id="collapseExample">
+                        <div class="row">
+                            <div class="col-8">
+                                <p class="h4 mb-0">Summary</p>
+                                <p class="mb-0"><span class="fw-bold">Product:</span><span class="c-green">: Name of product</span></p>
+                                <p class="mb-0"><span class="fw-bold">Price:</span><span class="c-green">:$452.90</span></p>
+                                <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque nihil neque quisquam aut repellendus, dicta vero? Animi dicta cupiditate, facilis provident quibusdam ab quis, iste harum ipsum hic, nemo qui!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body border p-0">
+                    <p> <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample"> <span class="fw-bold">Credit Card</span> <span class=""> <span class="fab fa-cc-amex"></span> <span class="fab fa-cc-mastercard"></span> <span class="fab fa-cc-discover"></span> </span> </a> </p>
+                    <div class="collapse show p-3 pt-0" id="collapseExample">
+                        <div class="row">
+                            <div class="col-lg-5 mb-lg-0 mb-3">
+                                <p class="h4 mb-0">Summary</p>
+                                <p class="mb-0"><span class="fw-bold">Product:</span><span class="c-green">: Name of product</span> </p>
+                                <p class="mb-0"> <span class="fw-bold">Price:</span> <span class="c-green">:$452.90</span> </p>
+                                <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque nihil neque quisquam aut repellendus, dicta vero? Animi dicta cupiditate, facilis provident quibusdam ab quis, iste harum ipsum hic, nemo qui!</p>
+                            </div>
+                            <div class="col-lg-7">
+                                <form action="" class="form">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form__div"> <input type="text" class="form-control" placeholder=" "> <label for="" class="form__label">Card Number</label> </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form__div"> <input type="text" class="form-control" placeholder=" "> <label for="" class="form__label">MM / yy</label> </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form__div"> <input type="password" class="form-control" placeholder=" "> <label for="" class="form__label">cvv code</label> </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form__div"> <input type="text" class="form-control" placeholder=" "> <label for="" class="form__label">name on the card</label> </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="btn btn-primary w-100" onclick="myFunction()">Sumbit</div>
+                                            
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="btn btn-primary payment" id="btn"> Make Payment </div>
+        </div>
+    </div>
+</div>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                      
+                <!-- Card -->
+
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-4">
+
+                <!-- Card -->
+                <div class="card mb-4">
+                    <div class="card-body">
+
+                        <h5 class="mb-3">The total amount </h5>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                Amount Payable
+                                <span>₹<span th:text="${total}"></span></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                Shipping
+                                <span>Gratis</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                <div>
+                                    <strong>The total amount of</strong>
+                                    <strong>
+                                        <p class="mb-0">(including VAT)</p>
+                                    </strong>
+                                </div>
+                                <span><strong>₹<span th:text="${total}"></span></strong></span>
+                            </li>
+                        </ul>
+
+                        <form action="" method="post" th:action="@{/payNow}" >
+                            <button type="submit"  class="btn btn-primary btn-block waves-effect waves-light">Pay Now</button>
+                        </form>
+
+                    </div>
+                </div>
+                <!-- Card -->
+
+                <!-- Card -->
+                <div class="card mb-4">
+                    <div class="card-body">
+
+                        <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse" href="#collapseExample"
+                           aria-expanded="false" aria-controls="collapseExample">
+                            Add a discount code (optional)
+                            <span><i class="fas fa-chevron-down pt-1"></i></span>
+                        </a>
+
+                        <div class="collapse" id="collapseExample">
+                            <div class="mt-3">
+                                <div class="md-form md-outline mb-0">
+                                    <input type="text" id="discount-code" class="form-control font-weight-light"
+                                           placeholder="Enter discount code">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card -->
+
+            </div>
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+    </section>
+    <!--Section: Block Content-->
+
+
+</div>
+
+<script>
+function myFunction() {
+  location.replace("https://netbanking.paytmbank.com/")
+}
+</script>
+<script src=
+        "https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity=
+"sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+        crossorigin="anonymous">
+ </script>
+ <script>
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                alert("Payment Successfully completed");
+            });
+        });
+    </script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
